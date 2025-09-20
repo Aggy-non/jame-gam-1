@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b71x1wdr1ymo6"]
+
+[ext_resource type="Script" uid="uid://u20ryhar5rjr" path="res://playerMove.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://cm2qfkxhdv64g" path="res://crowd_controller.gd" id="2_0e48y"]
+[ext_resource type="PackedScene" uid="uid://guvprm8632p4" path="res://lane.tscn" id="3_epypp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0e48y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(16, 32)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(15, 18)
+
+[node name="player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_wtcfe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+sprite_frames = SubResource("SpriteFrames_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(9, 4)
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="player visual" type="ColorRect" parent="player"]
+offset_left = 1.0
+offset_top = -12.0
+offset_right = 17.0
+offset_bottom = 20.0
+color = Color(0.0836219, 0.580627, 0.884409, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Crowd controller" type="Node2D" parent="."]
+script = ExtResource("2_0e48y")
+
+[node name="NoteHighway" type="Node2D" parent="."]
+position = Vector2(537, 396)
+
+[node name="highway base" type="Polygon2D" parent="NoteHighway"]
+position = Vector2(-6, -216)
+scale = Vector2(1.03514, 1.96512)
+color = Color(0.04, 0.02078, 0.0028, 1)
+polygon = PackedVector2Array(-84.6483, -30.4273, 109.164, -30.5325, 199.102, 225.491, -173.796, 225.491)
+uv = PackedVector2Array(-85, -32, 16, -32, 109, -32, 202, 226, -168, 224)
+
+[node name="Lane" parent="." instance=ExtResource("3_epypp")]
+position = Vector2(480, 152)
+spawn_rate = 2.0
+min_scale = 1.0
