@@ -1,7 +1,7 @@
 extends Node2D
 
+@export var lane_id := 0  # Set this to 0, 1, 2, or 3 per lane instance
 @export var note_scene: PackedScene
-@export var spawn_rate := 1.0
 @export var min_scale := 0.5
 @export var max_scale := 2.0
 
@@ -21,15 +21,16 @@ class ScalerNode:
 			queue_free()
 
 func _ready():
-	spawn_loop()
+	var beat_manager := get_node("/root/Main/BeatManager")  # Adjust path if needed
+	beat_manager.connect("beat", Callable(self, "_on_beat"))
 
-func spawn_loop():
-	while true:
+func _on_beat(lane: int, time: float):
+	if lane == lane_id:
 		spawn_note()
-		await get_tree().create_timer(spawn_rate).timeout
 
 func spawn_note():
 	var follower := PathFollow2D.new()
+	follower.rotates = false
 	$Path2D.add_child(follower)
 
 	var note := note_scene.instantiate()

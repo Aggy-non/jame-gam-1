@@ -5,16 +5,18 @@
 
 [sub_resource type="Curve2D" id="Curve2D_3g2cn"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -61, 429)
+"points": PackedVector2Array(0, 0, 0, 0, -2, 0, 0, 0, 0, 0, -59, 425)
 }
 point_count = 2
 
 [node name="Lane" type="Node2D"]
 script = ExtResource("1_phwy2")
 note_scene = ExtResource("2_3g2cn")
+min_scale = 1.0
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_3g2cn")
 
 [node name="NoteFollower" type="PathFollow2D" parent="Path2D"]
-rotation = 1.71204
+position = Vector2(-2, 0)
+rotation = 1.70412
